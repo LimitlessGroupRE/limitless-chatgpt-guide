@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Limitless Group — ChatGPT Image Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:       #faf8f5;
+  --surface:  #ffffff;
+  --surface2: #f3efe9;
+  --border:   #e8e0d4;
+  --gold:     #9b8c6e;
+  --gold-lt:  #c8bda8;
+  --gold-xlt: rgba(155,140,110,0.11);
+  --charcoal: #1a1a1a;
+  --mid:      #4a4540;
+  --muted:    #8a7f72;
+  --faint:    #b5ac9e;
+}
+html { background: var(--bg); }
+body { font-family: 'Barlow', sans-serif; background: var(--bg); color: var(--charcoal); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+/* HEADER */
+.site-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 1rem 1.25rem 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 10px rgba(0,0,0,0.05); }
+.header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
+.brand h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--charcoal); line-height: 1; }
+.brand p { font-size: 9px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--gold); margin-top: 3px; }
+.header-badge { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--charcoal); color: #faf8f5; padding: 5px 11px; border-radius: 3px; white-space: nowrap; }
+
+/* TABS */
+.tabs { display: flex; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab-btn { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 8px 13px; border: none; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); cursor: pointer; white-space: nowrap; -webkit-tap-highlight-color: transparent; transition: color .15s, border-color .15s; }
+.tab-btn.active { color: var(--charcoal); border-bottom-color: var(--gold); font-weight: 700; }
+
+/* PANELS */
+.panel { display: none; padding: 1.25rem; }
+.panel.active { display: block; }
+
+/* HELPERS */
+.sec { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.55rem; }
+.intro { font-size: 13px; color: var(--muted); line-height: 1.72; margin-bottom: 1.25rem; }
+.divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
+
+/* SETUP CARDS */
+.setup-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 1rem; }
+.setup-card-header { background: var(--charcoal); padding: 13px 16px; display: flex; align-items: center; gap: 10px; }
+.setup-card-header span { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #faf8f5; }
+.step-pill { background: var(--gold); color: var(--charcoal); font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 9px; border-radius: 3px; flex-shrink: 0; }
+.setup-body { padding: 14px 16px; }
+.setup-body p { font-size: 12.5px; color: var(--mid); line-height: 1.65; margin-bottom: 10px; }
+.setup-body p:last-child { margin-bottom: 0; }
+
+/* FIELD LIST */
+.field-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.field-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--mid); line-height: 1.5; }
+.field-list li::before { content: ''; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+
+/* BLOCK BOX */
+.block-box { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 8px; padding: 14px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14.5px; color: var(--mid); line-height: 1.78; margin-bottom: 10px; -webkit-user-select: all; user-select: all; }
+
+/* COPY BTN */
+.copy-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; color: var(--charcoal); font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 14px; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: background .15s, color .15s, border-color .15s; margin-bottom: 4px; }
+.copy-btn.copied { background: var(--charcoal); color: #faf8f5; border-color: var(--charcoal); }
+
+/* CALLOUT */
+.callout { background: var(--gold-xlt); border: 1px solid rgba(155,140,110,0.28); border-radius: 8px; padding: 12px 14px; font-size: 12px; color: var(--mid); line-height: 1.65; margin-bottom: 1.25rem; display: flex; align-items: flex-start; gap: 10px; }
+.callout-icon { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── WORKFLOW CARD — the main new component ── */
+.wf-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
+
+/* card header */
+.wf-header { background: var(--charcoal); padding: 14px 16px; display: flex; align-items: center; gap: 10px; cursor: pointer; -webkit-tap-highlight-color: transparent; user-select: none; }
+.wf-header .wf-icon { font-size: 18px; flex-shrink: 0; }
+.wf-header .wf-title { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #faf8f5; flex: 1; }
+.wf-header .wf-chevron { font-size: 18px; color: var(--gold); transition: transform .25s; flex-shrink: 0; }
+.wf-card.open .wf-chevron { transform: rotate(180deg); }
+
+/* collapsible body */
+.wf-body { display: none; }
+.wf-card.open .wf-body { display: block; }
+
+/* step rows inside a workflow */
+.wf-step { border-top: 1px solid var(--border); padding: 14px 16px; }
+.wf-step-label { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.wf-step-num { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); background: var(--gold-xlt); border-radius: 3px; padding: 3px 8px; flex-shrink: 0; }
+.wf-step-title { font-size: 12px; font-weight: 600; color: var(--charcoal); }
+.wf-step-note { font-size: 11.5px; color: var(--muted); line-height: 1.6; margin-bottom: 8px; }
+
+/* the copyable prompt text inside a step */
+.wf-prompt { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-size: 12px; color: var(--mid); line-height: 1.75; margin-bottom: 8px; -webkit-user-select: all; user-select: all; white-space: pre-wrap; }
+
+/* caption step — slightly warmer bg */
+.wf-step.caption { background: var(--surface2); }
+.wf-step.caption .wf-step-num { background: rgba(155,140,110,0.2); }
+
+/* tip inside a step */
+.wf-tip { font-size: 11px; color: var(--muted); font-style: italic; padding-left: 9px; border-left: 2px solid var(--gold-lt); line-height: 1.55; margin-top: 2px; }
+
+/* PILLARS */
+.pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.25rem; }
+.pillar { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 12px; text-align: center; }
+.pillar-icon { font-size: 20px; margin-bottom: 6px; display: block; }
+.pillar-t { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 4px; }
+.pillar-d { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+/* PALETTE */
+.palette { display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 8px; scrollbar-width: none; margin-bottom: 1.25rem; }
+.palette::-webkit-scrollbar { display: none; }
+.swatch { display: flex; flex-direction: column; align-items: center; gap: 5px; flex-shrink: 0; }
+.swatch-block { width: 52px; height: 34px; border-radius: 6px; border: 1px solid var(--border); }
+.swatch-label { font-size: 9px; color: var(--faint); text-align: center; line-height: 1.45; }
+
+/* RULE CARDS */
+.rule-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; display: flex; gap: 12px; align-items: flex-start; }
+.rule-icon { font-size: 18px; flex-shrink: 0; }
+.rule-title { font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 4px; }
+.rule-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.rule-fix { font-size: 11.5px; color: var(--mid); font-style: italic; margin-top: 6px; padding-left: 8px; border-left: 2px solid var(--gold-lt); line-height: 1.55; }
+
+/* TIP CARDS */
+.tip-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; display: flex; gap: 14px; align-items: flex-start; }
+.tip-num { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700; color: var(--border); line-height: 1; flex-shrink: 0; min-width: 28px; }
+.tip-title { font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 4px; }
+.tip-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* STEP ROWS (used in Tips tab) */
+.step { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; display: flex; gap: 12px; align-items: flex-start; }
+.step-badge { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; color: var(--gold); background: var(--gold-xlt); border-radius: 4px; padding: 3px 8px; flex-shrink: 0; margin-top: 2px; }
+.step-t { font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 3px; }
+.step-d { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* FOOTER */
+.site-footer { margin: 0.5rem 1.25rem 2rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.site-footer p { font-size: 10px; color: var(--faint); }
+.site-footer .ig { font-size: 10px; color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <div class="brand">
+      <h1>⌂ Limitless Group</h1>
+      <p>ChatGPT Image Creation Guide · @mylimitlessagent</p>
+    </div>
+    <div class="header-badge">Social Graphics</div>
+  </div>
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" onclick="showTab('setup',this)">Your Setup</button>
+    <button class="tab-btn" onclick="showTab('brand',this)">Brand Rules</button>
+    <button class="tab-btn" onclick="showTab('core',this)">Core Posts</button>
+    <button class="tab-btn" onclick="showTab('expanded',this)">More Posts</button>
+    <button class="tab-btn" onclick="showTab('tips',this)">Tips</button>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════
+     YOUR SETUP
+══════════════════════════════════ -->
+<div class="panel active" id="panel-setup">
+  <p class="intro">Do this once at the start of every ChatGPT session. This teaches ChatGPT who you are, what the brand looks like, and how to think — before you ask it to create anything.</p>
+
+  <div class="setup-card">
+    <div class="setup-card-header"><div class="step-pill">Step 1</div><span>Upload your files first</span></div>
+    <div class="setup-body">
+      <p>Before typing anything, upload both of these into the chat using the attachment button.</p>
+      <ul class="field-list">
+        <li><strong>Your professional headshot</strong> — used on agent intro, market updates, and contact slides</li>
+        <li><strong>The Limitless Group logo</strong> — upload a version <strong>with a background</strong> (white or cream). Transparent PNG files cause rendering issues. If you only have a transparent version, screenshot it on a white background first, or screenshot it from any Limitless marketing material.</li>
+      </ul>
+      <p style="font-size:11.5px;color:var(--muted);font-style:italic;">💡 One upload per session. ChatGPT remembers both files for every graphic you create in that conversation.</p>
+    </div>
+  </div>
+
+  <div class="setup-card">
+    <div class="setup-card-header"><div class="step-pill">Step 2</div><span>Send your intro + brand instructions</span></div>
+    <div class="setup-body">
+      <p>After uploading, send this message with your real details filled in. This is the foundation ChatGPT uses for the entire session.</p>
+      <div class="block-box" id="setup-block">I'm going to have you create a series of Instagram graphics for me today. Before we start, here's everything you need to know:
+
+MY INFO:
+Name: [YOUR FULL NAME], REALTOR®
+Phone: [YOUR PHONE NUMBER]
+Email: [YOUR EMAIL ADDRESS]
+Instagram: @mylimitlessagent
+Brokerage: Limitless Group
+
+I've uploaded my headshot and the Limitless Group logo above. Reference them whenever an agent photo or logo is needed — don't generate a fake logo or placeholder.
+
+BRAND STYLE — follow these rules for every single graphic:
+- Always use a real estate photo as the background — an interior or exterior of a home. Never use a plain, solid, or abstract background.
+- If the background photo competes with the text, blur it, fade it with an overlay, or both. The photo should always feel present but never overwhelming.
+- Color palette: warm white (#faf8f5), soft cream (#f3efe9), warm gold (#9b8c6e), and deep charcoal (#1a1a1a) only. No blues, greens, purples, or any other colors.
+- Typography: bold condensed all-caps for headlines, wide letter-spacing for labels and subtext, clean sans-serif for body copy.
+- Tone: boutique luxury real estate — editorial, refined, confident. Think high-end real estate magazine.
+- The Limitless Group logo appears on every graphic. Use the file I uploaded — never generate a version.
+- My contact info appears where it makes sense for the post type. Use only my real details above — never placeholder text.
+
+Default size is 1080x1080px. I'll share each request one at a time.</div>
+      <button class="copy-btn" onclick="copyId(this,'setup-block')">📋 Copy Setup Message</button>
+    </div>
+  </div>
+
+  <div class="setup-card">
+    <div class="setup-card-header"><div class="step-pill">Step 3</div><span>Pick a post type and follow its workflow</span></div>
+    <div class="setup-body">
+      <p>Head to <strong>Core Posts</strong> or <strong>More Posts</strong> above. Each post type has its own step-by-step workflow — cover graphic, carousel slides, and caption — all designed to be sent one step at a time within the same chat. You don't need to start a new session between steps.</p>
+      <p style="font-size:11.5px;color:var(--muted);font-style:italic;">💡 Important: always let ChatGPT finish generating one image before sending the next step. It works one request at a time.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     BRAND RULES
+══════════════════════════════════ -->
+<div class="panel" id="panel-brand">
+  <p class="intro">A quick reference for what the Limitless brand looks and feels like — and exactly what to say when ChatGPT drifts off-brand.</p>
+
+  <div class="sec">Core brand rules</div>
+  <div class="pillars">
+    <div class="pillar"><span class="pillar-icon">🏡</span><div class="pillar-t">Always a home</div><div class="pillar-d">Every graphic uses a real estate photo — interior or exterior. Never a plain background.</div></div>
+    <div class="pillar"><span class="pillar-icon">🌫️</span><div class="pillar-t">Blur & fade</div><div class="pillar-d">If the photo competes with text, blur it, apply an overlay, or both. Image stays present, text stays readable.</div></div>
+    <div class="pillar"><span class="pillar-icon">🎨</span><div class="pillar-t">4 colors only</div><div class="pillar-d">Warm white, soft cream, warm gold, deep charcoal. Nothing else — ever.</div></div>
+    <div class="pillar"><span class="pillar-icon">✏️</span><div class="pillar-t">Editorial type</div><div class="pillar-d">Bold condensed all-caps headlines. Wide-spaced labels. Clean sans-serif body. Serif accents for quotes.</div></div>
+  </div>
+
+  <div class="sec">Brand color palette</div>
+  <div class="palette">
+    <div class="swatch"><div class="swatch-block" style="background:#faf8f5;border-color:#ddd;"></div><div class="swatch-label">Warm White<br>#faf8f5</div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#f3efe9;"></div><div class="swatch-label">Soft Cream<br>#f3efe9</div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#c8bda8;"></div><div class="swatch-label">Light Gold<br>#c8bda8</div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#9b8c6e;"></div><div class="swatch-label">Warm Gold<br>#9b8c6e</div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#4a4540;"></div><div class="swatch-label">Dark Brown<br>#4a4540</div></div>
+    <div class="swatch"><div class="swatch-block" style="background:#1a1a1a;"></div><div class="swatch-label">Charcoal<br>#1a1a1a</div></div>
+  </div>
+
+  <div class="sec">When ChatGPT goes off-brand — what to say</div>
+
+  <div class="rule-card"><div class="rule-icon">🔵</div><div><div class="rule-title">Wrong colors appeared</div><div class="rule-desc">Blue, green, purple, or anything not in the palette.</div><div class="rule-fix">"Please revise — remove all colors except warm white (#faf8f5), warm gold (#9b8c6e), and deep charcoal (#1a1a1a)."</div></div></div>
+  <div class="rule-card"><div class="rule-icon">⬜</div><div><div class="rule-title">Plain or solid background</div><div class="rule-desc">ChatGPT generated a flat color background with no home photo.</div><div class="rule-fix">"Please redo this with a real estate interior or exterior as the background. If it's too busy behind the text, blur it or apply a soft overlay."</div></div></div>
+  <div class="rule-card"><div class="rule-icon">🖼️</div><div><div class="rule-title">Logo is missing or rendering oddly</div><div class="rule-desc">Most common cause: uploading the logo as a transparent PNG. Upload a version with a white or cream background instead. To fix mid-session, use the inline pencil editor — select the logo area and say: "Replace this with the Limitless Group logo from my uploaded file."</div><div class="rule-fix">Prevention: screenshot the logo from any Limitless marketing PDF — it will have a background already.</div></div></div>
+  <div class="rule-card"><div class="rule-icon">👤</div><div><div class="rule-title">My info shows as placeholder text</div><div class="rule-desc">Name, phone, or handle appears as "[AGENT NAME]" or similar.</div><div class="rule-fix">"Replace all placeholder text with my real info from our session setup: [your name], [your phone], [your email], @mylimitlessagent."</div></div></div>
+  <div class="rule-card"><div class="rule-icon">📰</div><div><div class="rule-title">Looks too generic or template-y</div><div class="rule-desc">Result looks like a stock social media template, not luxury real estate.</div><div class="rule-fix">"This feels too generic. Make it more editorial — think high-end real estate magazine. Refine the typography, add breathing room, and remove anything decorative that isn't serving the design."</div></div></div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     CORE POSTS
+══════════════════════════════════ -->
+<div class="panel" id="panel-core">
+  <p class="intro">Tap any post type to expand its full workflow. Each one walks you through the cover graphic, any carousel slides, and the caption — step by step, in the same chat session.</p>
+
+  <div class="callout"><div class="callout-icon">💡</div><div>Complete <strong>Your Setup</strong> before using any of these. Your info, logo, and brand rules are already loaded — just fill in what's specific to this post.</div></div>
+
+
+  <!-- ── NEW LISTING ── -->
+  <div class="wf-card" id="wf-listing">
+    <div class="wf-header" onclick="toggleWf('wf-listing')">
+      <span class="wf-icon">🏠</span>
+      <span class="wf-title">New Listing Announcement</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Listing graphic</span></div>
+        <div class="wf-step-note">Attach two photos: your <strong>listing exterior photo</strong> and your <strong>headshot</strong>. ChatGPT removes the background and composites you in automatically.</div>
+        <div class="wf-prompt" id="wf-listing-1">Create a new listing Instagram graphic (1080x1350px — portrait format).
+
+I'm attaching two files: (1) the listing exterior photo and (2) my headshot.
+
+Layout:
+- The listing photo fills the entire canvas as a full-bleed background. Do not add any overlay, brightness adjustment, gradient, or vignette — preserve the photo exactly as it is, natural colors and all.
+- "FOR SALE" in very large bold serif all-caps in the upper portion of the image. Use ITC Benguiat or the closest available heavy serif with that same distinctive character. Stack the text so it repeats 3 times in a layered ghost effect — fully opaque white on top, then around 40% opacity, then around 15% — creating a typographic depth effect. Frame the text block with a thin white rectangle border, inset slightly from the edges.
+- Remove the background from my headshot and place me as a cutout standing in the lower right foreground, large and natural — like I'm standing in front of the home. I should extend all the way down to the bottom bar with no gap or negative space below me.
+- Address and key highlights (beds/baths) in bold white condensed caps in the lower left, above the bottom bar.
+- Bottom bar across the full width — solid dark charcoal strip. Left side: Limitless Group logo from my uploaded file. Right side: "LISTED BY" in small wide-tracked caps above my full name in large condensed white caps, and my phone number below.
+
+Listing details:
+Address: [STREET ADDRESS, CITY, STATE ZIP]
+Beds/Baths: [e.g. 4 BED | 2.5 BATH]
+Price: [LIST PRICE — optional, include if you want it shown]
+
+Use my real name and phone from our session setup. No placeholder text anywhere.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-listing-1')">📋 Copy Step 1</button>
+        <div class="wf-tip">If the ghost text effect looks too harsh or the photo feels enhanced/brightened, say: "Keep the photo completely unaltered — remove any brightness, contrast, or color adjustments. The image should look exactly as I uploaded it."</div>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-step-note">Send after the graphic is done.</div>
+        <div class="wf-prompt" id="wf-listing-2">Now write an Instagram caption for this listing post. Use the property details from this session.
+
+Style: warm, conversational, and confident — not salesy. Lead with something compelling about the home or the opportunity, not just the specs. Weave in the address, price, and highlights naturally. End with a call to action (DM me, link in bio, or my contact info). Add 15–20 relevant hashtags — mix local Fort Wayne tags, real estate tags, and Limitless Group branding.
+
+Write 2 versions: one short (3–4 sentences) and one longer (6–8 sentences). I'll pick whichever fits the vibe.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-listing-2')">📋 Copy Step 2</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── JUST SOLD ── -->
+  <div class="wf-card" id="wf-sold">
+    <div class="wf-header" onclick="toggleWf('wf-sold')">
+      <span class="wf-icon">🏆</span>
+      <span class="wf-title">Just Sold</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Cover graphic</span></div>
+        <div class="wf-step-note">Attach the property photo to this message.</div>
+        <div class="wf-prompt" id="wf-sold-1">Create a just sold Instagram graphic (1080x1350px — portrait format).
+
+I'm attaching two files: (1) the property exterior photo and (2) my headshot.
+
+Layout:
+- The property photo fills the entire canvas as a full-bleed background. Do not add any overlay, brightness adjustment, or vignette — keep the photo exactly as it appears, natural tones and all.
+- "JUST SOLD" in very large bold serif all-caps in the upper portion of the image. Use ITC Benguiat or the closest available heavy serif with that same character. Stack the text with a layered ghost effect — fully opaque white on top, then ~40% opacity, then ~15% — with a thin white rectangle border framing the text block.
+- Remove the background from my headshot and place me as a cutout in the lower right foreground, large and natural. I should extend all the way down to the bottom bar with no gap below me.
+- Address in bold white condensed caps in the lower left, above the bottom bar.
+- Bottom bar — solid dark charcoal strip. Left: Limitless Group logo from my uploaded file. Right: "SOLD BY" in small wide-tracked caps, then my full name large, then my phone number below.
+
+Address: [STREET ADDRESS, CITY]
+
+Use my real name and phone from our session setup. Celebratory but polished — no confetti, no bright colors.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-sold-1')">📋 Copy Step 1</button>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">Interior highlight slides (optional carousel)</span></div>
+        <div class="wf-step-note">Attach 2–3 interior photos. ChatGPT will turn them into matching carousel slides.</div>
+        <div class="wf-prompt" id="wf-sold-2">Now create 2–3 additional carousel slides (1080x1080px each) using the interior photos I'm attaching. Each slide uses a different photo as a full-bleed background — do not alter the photo colors or add overlays. Blur only if text absolutely needs it to be readable. Add "JUST SOLD" in small gold wide-tracked caps in the corner, and the Limitless Group logo at the bottom. Keep it minimal — let the photos do the talking.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-sold-2')">📋 Copy Step 2</button>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 3</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-prompt" id="wf-sold-3">Now write an Instagram caption for this just sold post.
+
+Style: celebratory but grounded — honor the milestone without being braggy. Lead with something meaningful: the client's journey, what made this home special, or what this sale means. Weave in the address naturally. End with a warm call to action inviting anyone thinking about buying or selling to reach out. Add 15–20 hashtags mixing local, real estate, and Limitless branding tags.
+
+Write 2 versions: one short (3–4 sentences) and one longer (6–8 sentences).</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-sold-3')">📋 Copy Step 3</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── TESTIMONIAL ── -->
+  <div class="wf-card" id="wf-testimonial">
+    <div class="wf-header" onclick="toggleWf('wf-testimonial')">
+      <span class="wf-icon">💬</span>
+      <span class="wf-title">Client Testimonial</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Quote graphic</span></div>
+        <div class="wf-step-note">Paste the client's actual words directly — even if they're long. ChatGPT will edit for length and flow.</div>
+        <div class="wf-prompt" id="wf-test-1">Create a client testimonial Instagram graphic (1080x1080px).
+
+Use a warm, inviting real estate interior or exterior photo as the background — something that feels personal and home-like. Blur it back and apply a soft light overlay so it's atmospheric but doesn't compete with the quote.
+
+The client's review: [PASTE THEIR ACTUAL WORDS HERE]
+Client first name: [FIRST NAME ONLY]
+
+Design: the quote in an elegant serif font, centered, in deep charcoal. Edit the quote for length if needed — aim for 2–3 impactful sentences. Thin warm gold horizontal rules above and below the quote block. Attribution in small warm gold spaced caps below: — [FIRST NAME], Limitless Group Client. The Limitless Group logo at the bottom — use the uploaded file. No contact info on this one — keep it warm and personal.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-test-1')">📋 Copy Step 1</button>
+        <div class="wf-tip">Optionally attach a photo of the client's home for an extra personal touch.</div>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-prompt" id="wf-test-2">Now write an Instagram caption to go with this testimonial graphic.
+
+Style: warm, genuine, and human. Let the client's experience speak — don't over-explain. A brief intro sentence or two, then invite others to share their own experience or reach out. Add 15–20 hashtags mixing client experience, local, and Limitless branding tags.
+
+Write 2 versions: one short (2–3 sentences) and one longer (5–6 sentences).</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-test-2')">📋 Copy Step 2</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── AGENT INTRO ── -->
+  <div class="wf-card" id="wf-agent">
+    <div class="wf-header" onclick="toggleWf('wf-agent')">
+      <span class="wf-icon">👤</span>
+      <span class="wf-title">Agent Introduction</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Profile graphic</span></div>
+        <div class="wf-step-note">Your headshot is already uploaded from setup. Optionally attach an interior photo for the background panel.</div>
+        <div class="wf-prompt" id="wf-agent-1">Create an agent introduction Instagram graphic (1080x1350px — portrait format).
+
+I'm attaching my headshot. Use a beautiful real estate interior as the background — either source one or I'll attach one. Keep the photo as a full-bleed background; if the interior is very busy, blur it back softly so it reads as atmosphere rather than detail, but don't kill it with an overlay.
+
+Remove the background from my headshot and place me as a cutout in the lower right foreground — large, confident, extending all the way to the bottom bar with no gap.
+
+Upper portion: my name in very large bold serif all-caps — ITC Benguiat or the closest heavy serif with that same character. Use the same layered ghost effect as the listing graphics: fully opaque on top, then ~40% and ~15% opacity repeating below, with a thin white rectangle border framing the name block.
+
+Lower left above the bottom bar: "REALTOR® · LIMITLESS GROUP" in small warm gold wide-tracked caps, then my phone and email from our session setup.
+
+Bottom bar — solid dark charcoal strip. Left: Limitless Group logo from my uploaded file. Right: @mylimitlessagent in wide-tracked white caps.
+
+No placeholder text. Editorial and confident — this is a first impression.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-agent-1')">📋 Copy Step 1</button>
+        <div class="wf-tip">Attach an interior photo you love for the background — a bright, airy living space works beautifully behind a cutout portrait.</div>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-prompt" id="wf-agent-2">Now write an Instagram caption to accompany this agent introduction graphic.
+
+Style: warm, professional, and personal — this is a first impression. Share a sentence or two about who I am, what I care about in real estate, and why someone would want to work with me. End with an invitation to connect. Add 15–20 hashtags mixing agent branding, local Fort Wayne tags, and Limitless Group tags.
+
+Write 2 versions: one short (3–4 sentences) and one longer bio-style (7–8 sentences).</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-agent-2')">📋 Copy Step 2</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── TIPS CAROUSEL ── -->
+  <div class="wf-card" id="wf-tips">
+    <div class="wf-header" onclick="toggleWf('wf-tips')">
+      <span class="wf-icon">💡</span>
+      <span class="wf-title">Educational Tips Carousel</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Cover slide</span></div>
+        <div class="wf-step-note">You can attach your own home photos, or let ChatGPT source its own for this post type.</div>
+        <div class="wf-prompt" id="wf-tips-1">Create the cover slide for an Instagram carousel (1080x1080px) on the topic: [YOUR TOPIC, e.g. "5 Things Every First-Time Buyer Should Know"].
+
+Use a beautiful real estate photo as the background — blurred or faded as needed so the text reads clearly. Title in bold condensed white all-caps, centered. My name and the Limitless Group logo at the bottom — from our session setup.
+
+Once you've created this cover, let me know and I'll ask for the content slides next.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-tips-1')">📋 Copy Step 1</button>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">Content slides (one at a time)</span></div>
+        <div class="wf-step-note">Send this after the cover is done. ChatGPT will create the tip slides one by one — let each finish before asking for the next.</div>
+        <div class="wf-prompt" id="wf-tips-2">Now create the tip slides for this carousel, one at a time. Start with tip #1.
+
+Each slide (1080x1080px): use a different real estate photo as the background — blurred or faded so content stays readable. Large tip number in warm gold. Tip headline in bold condensed charcoal. 1–2 sentences of body copy in clean charcoal sans-serif. Limitless Group logo in the bottom corner — from the uploaded file. @mylimitlessagent in small gold caps.
+
+Do your own research to write accurate, genuinely helpful tips on this topic. When slide 1 is done, I'll ask for the next one.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-tips-2')">📋 Copy Step 2</button>
+        <div class="wf-tip">After each slide is delivered, simply say "Next slide please" — ChatGPT will continue in the same style automatically.</div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 3</span><span class="wf-step-title">Final "contact me" slide</span></div>
+        <div class="wf-prompt" id="wf-tips-3">Now create a final contact slide to close the carousel (1080x1080px).
+
+Use a warm real estate interior or exterior photo as the background, blurred or faded back. My headshot from the session upload, placed naturally — left side or bottom corner. A warm closing line like "Questions about [TOPIC]? I'm here to help." in elegant type. My full name, phone, email, and Instagram handle from our session setup. The Limitless Group logo. This slide should feel like a personal invitation, not a hard sell.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-tips-3')">📋 Copy Step 3</button>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 4</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-prompt" id="wf-tips-4">Now write an Instagram caption for this carousel post on [TOPIC].
+
+Style: educational and approachable — position me as a knowledgeable local expert, not a salesperson. Tease what's inside the carousel to drive swipe-throughs. End with a question or call to action that invites engagement. Add 15–20 hashtags mixing the topic, local Fort Wayne tags, and real estate branding tags.
+
+Write 2 versions: one short (3–4 sentences) and one longer (6–8 sentences).</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-tips-4')">📋 Copy Step 4</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════
+     MORE POSTS
+══════════════════════════════════ -->
+<div class="panel" id="panel-expanded">
+  <p class="intro">More post types, each with their own full workflow. Tap to expand, follow the steps in order.</p>
+
+  <div class="callout"><div class="callout-icon">💡</div><div>Complete <strong>Your Setup</strong> first. Your info, logo, and brand rules carry through every workflow in this session.</div></div>
+
+
+  <!-- ── MARKET UPDATE ── -->
+  <div class="wf-card" id="wf-market">
+    <div class="wf-header" onclick="toggleWf('wf-market')">
+      <span class="wf-icon">📊</span>
+      <span class="wf-title">Market Update</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Cover graphic with stats</span></div>
+        <div class="wf-step-note">ChatGPT will research and populate the stats. Always verify the numbers against your MLS before posting.</div>
+        <div class="wf-prompt" id="wf-market-1">Create a local market update Instagram graphic (1080x1080px).
+
+Market area: [CITY OR NEIGHBORHOOD]
+Time period: [e.g. April 2026]
+
+Before designing, research the most current publicly available real estate market data for this area and time period — pull from sources like Realtor.com, Zillow, Redfin, or local MLS reports. Use real numbers only. Display 3 key stats: homes sold, median sale price, and average days on market. Include year-over-year comparison figures where available. Cite your data source in small fine print on the graphic.
+
+Use a real estate interior or exterior photo as the background — blurred back significantly so the data reads clearly. "[AREA] MARKET UPDATE" as the headline in bold condensed charcoal all-caps. Stats in large warm gold numbers with small charcoal labels and YoY change below each. Thin gold dividers between stats. My name, phone, email, Instagram handle, my headshot, and the Limitless Group logo at the bottom — from our session setup.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-market-1')">📋 Copy Step 1</button>
+        <div class="wf-tip">Double-check the stats ChatGPT pulls before posting — public data sources can lag by a few weeks. Your MLS is the most accurate source.</div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">What this means for buyers & sellers (carousel)</span></div>
+        <div class="wf-step-note">Send this after the cover is done. ChatGPT will add 2 context slides that make the data feel relevant and personal.</div>
+        <div class="wf-prompt" id="wf-market-2">Now create 2 additional carousel slides (1080x1080px each) that put this market data into context.
+
+Slide 2 — "What this means for buyers": Based on the stats, write 2–3 concise takeaways for buyers in this market right now. Use a real estate photo background (blurred/faded). Clean editorial layout consistent with the cover slide.
+
+Slide 3 — "What this means for sellers": Based on the stats, write 2–3 concise takeaways for sellers. Same style. End with a warm line inviting them to reach out with questions.
+
+The Limitless Group logo in the corner of each slide. My Instagram handle in small gold caps. Match the visual style of the cover exactly.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-market-2')">📋 Copy Step 2</button>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 3</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-prompt" id="wf-market-3">Now write an Instagram caption for this market update carousel.
+
+Style: informative and local-expert energy — make the numbers feel meaningful and relevant, not just data for data's sake. Tease the buyer and seller takeaway slides to encourage swipe-throughs. End with an invitation to DM or call with questions. Add 15–20 hashtags mixing local market, Fort Wayne real estate, and Limitless branding tags.
+
+Write 2 versions: one short (3–4 sentences) and one longer (6–8 sentences).</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-market-3')">📋 Copy Step 3</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── NEIGHBORHOOD SPOTLIGHT ── -->
+  <div class="wf-card" id="wf-neighborhood">
+    <div class="wf-header" onclick="toggleWf('wf-neighborhood')">
+      <span class="wf-icon">📍</span>
+      <span class="wf-title">Neighborhood Spotlight</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Cover graphic</span></div>
+        <div class="wf-step-note">Attach your neighborhood photos — the more you provide, the better ChatGPT can compose the layout.</div>
+        <div class="wf-prompt" id="wf-neighborhood-1">Create a neighborhood spotlight cover graphic (1080x1080px) for [NEIGHBORHOOD NAME].
+
+Use the photos I'm attaching in an editorial collage layout — local homes, streets, or lifestyle shots. If any images need toning down behind text overlays, blur or fade selectively but let the neighborhood breathe visually.
+
+Design: "[NEIGHBORHOOD NAME]" in large bold condensed white all-caps across the bottom. "Explored by Limitless Group" in small warm gold spaced caps below. The Limitless Group logo in the corner — from our session setup. Travel magazine editorial feel.
+
+Once the cover is ready, let me know and I'll ask for the content slides.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-neighborhood-1')">📋 Copy Step 1</button>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">Fun facts slide</span></div>
+        <div class="wf-step-note">ChatGPT will research the neighborhood. Send this after the cover is complete.</div>
+        <div class="wf-prompt" id="wf-neighborhood-2">Now create a fun facts slide about [NEIGHBORHOOD NAME] (1080x1080px).
+
+Do your own research on this neighborhood — look up interesting history, unique character, notable spots, or things that make it distinct. Write 3–4 genuinely interesting fun facts (not generic "great community!" filler). Use a neighborhood or lifestyle photo as the background, blurred or faded as needed. Editorial layout with each fact clearly presented. "FUN FACTS · [NEIGHBORHOOD NAME]" as the header in gold spaced caps. Limitless Group logo in the corner. When this slide is done, let me know and I'll ask for the next one.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-neighborhood-2')">📋 Copy Step 2</button>
+        <div class="wf-tip">This is where ChatGPT really shines — let it do the research rather than writing the facts yourself.</div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 3</span><span class="wf-step-title">Key details slide</span></div>
+        <div class="wf-prompt" id="wf-neighborhood-3">Now create a key details slide for [NEIGHBORHOOD NAME] (1080x1080px).
+
+Research and include practical details a buyer would actually care about: approximate price range for homes, proximity to schools or downtown, walkability, any major employers or amenities nearby, and the general vibe (quiet and residential vs. vibrant and walkable, etc.). Use a neighborhood photo background, blurred or faded. Same editorial layout and style as the previous slides. "LIVING IN [NEIGHBORHOOD NAME]" as the header. Limitless Group logo in the corner. Let me know when this is done.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-neighborhood-3')">📋 Copy Step 3</button>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 4</span><span class="wf-step-title">Personal contact slide</span></div>
+        <div class="wf-prompt" id="wf-neighborhood-4">Now create a final contact slide to close this carousel (1080x1080px).
+
+Use a warm home interior or exterior photo as the background, blurred or faded back softly. My headshot from the session upload, placed naturally. A warm, personal closing line: "Curious about [NEIGHBORHOOD NAME] or any other Fort Wayne neighborhood? Let's talk." My name, phone, email, and Instagram handle from our session setup. The Limitless Group logo. This slide should feel like a personal invitation — not a hard sell.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-neighborhood-4')">📋 Copy Step 4</button>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 5</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-prompt" id="wf-neighborhood-5">Now write an Instagram caption for this neighborhood spotlight carousel on [NEIGHBORHOOD NAME].
+
+Style: enthusiastic local guide energy — make this feel like an insider's recommendation, not a real estate pitch. Tease a fun fact or key detail to encourage swipe-throughs. End with an invitation to reach out for anyone thinking about the area. Add 15–20 hashtags mixing neighborhood-specific, Fort Wayne local, and real estate tags.
+
+Write 2 versions: one short (3–4 sentences) and one longer (6–8 sentences).</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-neighborhood-5')">📋 Copy Step 5</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── OPEN HOUSE ── -->
+  <div class="wf-card" id="wf-openhouse">
+    <div class="wf-header" onclick="toggleWf('wf-openhouse')">
+      <span class="wf-icon">📅</span>
+      <span class="wf-title">Open House</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Event graphic</span></div>
+        <div class="wf-step-note">Attach the property exterior photo before sending.</div>
+        <div class="wf-prompt" id="wf-oh-1">Create an open house Instagram graphic (1080x1350px — portrait format).
+
+I'm attaching two files: (1) the property exterior photo and (2) my headshot.
+
+Layout:
+- The property photo fills the entire canvas as a full-bleed background. Preserve the photo exactly — no color enhancement, no overlay, no vignette.
+- "OPEN HOUSE" in very large bold serif all-caps in the upper portion. Use ITC Benguiat or the closest heavy serif with that same character. Stack the text with the layered ghost effect — fully opaque white on top, then ~40% and ~15% opacity repeating below, with a thin white rectangle border framing the text block.
+- Remove the background from my headshot and place me as a cutout in the lower right foreground, large and natural, extending down to the bottom bar with no gap.
+- Event details in bold white condensed caps in the lower left above the bottom bar: date, time, and address stacked cleanly.
+- Bottom bar — solid dark charcoal strip. Left: Limitless Group logo from my uploaded file. Right: "HOSTED BY" in small wide-tracked caps, then my full name large, then my phone number.
+
+Event details:
+Address: [STREET ADDRESS]
+Date: [DAY, MONTH DATE]
+Time: [TIME RANGE]
+
+Use my real name and phone from our session setup. Clean, confident, and inviting — no clip art.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-oh-1')">📋 Copy Step 1</button>
+        <div class="wf-tip">After the feed post, ask: "Now create the same design at 1080x1920px for Instagram Stories." ChatGPT will recompose it vertically.</div>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-prompt" id="wf-oh-2">Now write an Instagram caption for this open house post.
+
+Style: warm and inviting — make people want to come see the home. Include the date, time, and address naturally in the copy. Invite people to stop by, no appointment needed. End with my contact info for questions. Add 15–20 hashtags mixing open house, local, and real estate tags.
+
+Write 2 versions: one short (2–3 sentences) and one with more detail about the home (5–6 sentences).</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-oh-2')">📋 Copy Step 2</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── COMING SOON ── -->
+  <div class="wf-card" id="wf-comingsoon">
+    <div class="wf-header" onclick="toggleWf('wf-comingsoon')">
+      <span class="wf-icon">👀</span>
+      <span class="wf-title">Coming Soon</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Teaser graphic</span></div>
+        <div class="wf-step-note">Attach the property photo. The intentional blur/dark overlay is on-brand here — it builds anticipation.</div>
+        <div class="wf-prompt" id="wf-cs-1">Create a coming soon teaser Instagram graphic (1080x1350px — portrait format).
+
+I'm attaching two files: (1) the property exterior photo and (2) my headshot.
+
+Layout:
+- The property photo fills the entire canvas as a full-bleed background. This is the one case where you can blur the photo more heavily and apply a darker overlay — the mystery is intentional. The home should be visible but slightly obscured, building anticipation.
+- "COMING SOON" in very large bold serif all-caps in the upper portion. Use ITC Benguiat or the closest heavy serif with that same character. Stack the text with the layered ghost effect — fully opaque white on top, then ~40% and ~15% opacity below, with a thin white rectangle border framing the text.
+- Remove the background from my headshot and place me as a cutout in the lower right foreground, large and natural, extending down to the bottom bar with no gap.
+- Area or teaser line in warm gold wide-tracked caps in the lower left above the bottom bar.
+- Bottom bar — solid dark charcoal strip. Left: Limitless Group logo from my uploaded file. Right: my full name and phone from our session setup.
+
+Area or neighborhood: [NEIGHBORHOOD OR CITY — no full address yet]
+Teaser line: [optional — e.g. "A rare find in Fort Wayne" — or leave blank and write something compelling]
+Timeframe: [optional — e.g. "Available next week"]
+
+No placeholder text anywhere.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-cs-1')">📋 Copy Step 1</button>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-prompt" id="wf-cs-2">Now write an Instagram caption for this coming soon teaser.
+
+Style: mysterious and exciting — build anticipation without giving too much away. Hint at what makes the property special. Invite people to follow for the reveal or DM me for early details. Add 15–20 hashtags mixing coming soon, local, and real estate tags.
+
+Write 2 versions: one short and punchy (2–3 sentences) and one with a bit more intrigue (4–5 sentences).</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-cs-2')">📋 Copy Step 2</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── PRICE IMPROVEMENT ── -->
+  <div class="wf-card" id="wf-price">
+    <div class="wf-header" onclick="toggleWf('wf-price')">
+      <span class="wf-icon">📉</span>
+      <span class="wf-title">Price Improvement</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Announcement graphic</span></div>
+        <div class="wf-step-note">Attach your listing photo before sending.</div>
+        <div class="wf-prompt" id="wf-price-1">Create a price improvement Instagram graphic (1080x1350px — portrait format).
+
+I'm attaching two files: (1) the listing photo and (2) my headshot.
+
+Layout:
+- The listing photo fills the entire canvas as a full-bleed background. Preserve the photo exactly — no color enhancement, no vignette, no overlay.
+- "PRICE IMPROVEMENT" or "NOW PRICED AT" in very large bold serif all-caps in the upper portion. Use ITC Benguiat or the closest heavy serif with that same character. Stack the text with the layered ghost effect — fully opaque warm gold on top (not white — gold makes this feel like opportunity, not urgency), then ~40% and ~15% opacity below, with a thin gold rectangle border framing the text.
+- Remove the background from my headshot and place me as a cutout in the lower right foreground, large and natural, extending down to the bottom bar with no gap.
+- Address and new price in bold white condensed caps in the lower left above the bottom bar.
+- Bottom bar — solid dark charcoal strip. Left: Limitless Group logo from my uploaded file. Right: my full name and phone from our session setup.
+
+Details:
+Address: [STREET ADDRESS]
+New price: [NEW PRICE]
+Previous price: [PREVIOUS PRICE — delete this line if you don't want to show the comparison]
+
+Tone: confident and opportunity-focused. This is good news for buyers — make it feel that way.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-price-1')">📋 Copy Step 1</button>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-prompt" id="wf-price-2">Now write an Instagram caption for this price improvement post.
+
+Style: opportunity-focused and confident — frame this as great news for buyers, not a sign of desperation. Lead with the opportunity angle. Include the new price and address naturally. End with an invitation to schedule a showing. Add 15–20 hashtags mixing listing, local, and buyer-focused tags.
+
+Write 2 versions: one short (2–3 sentences) and one with more context (5–6 sentences).</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-price-2')">📋 Copy Step 2</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── HOLIDAY / SEASONAL ── -->
+  <div class="wf-card" id="wf-holiday">
+    <div class="wf-header" onclick="toggleWf('wf-holiday')">
+      <span class="wf-icon">🌿</span>
+      <span class="wf-title">Holiday / Seasonal</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Seasonal graphic</span></div>
+        <div class="wf-prompt" id="wf-holiday-1">Create a seasonal greeting Instagram graphic (1080x1080px).
+
+Use a lifestyle real estate photo that fits the season — [DESCRIBE THE VIBE, e.g. a cozy lit interior for the holidays / a bright airy home for spring / a warm golden-hour exterior for fall]. Apply a soft overlay to pull the photo back just enough for text to read cleanly while keeping the mood intact.
+
+Greeting: [YOUR MESSAGE, e.g. "Wishing you a warm and wonderful holiday season"]
+Sign-off: From [YOUR NAME] & The Limitless Group Team
+
+Design: the greeting in elegant serif or refined condensed type, centered, in warm white. Sign-off in small warm gold spaced caps. The Limitless Group logo at the bottom center — from our session setup. Warm and personal. No clip art.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-holiday-1')">📋 Copy Step 1</button>
+        <div class="wf-tip">Attaching a real seasonal photo almost always produces a better result than letting ChatGPT generate one.</div>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-prompt" id="wf-holiday-2">Now write an Instagram caption for this seasonal post.
+
+Style: warm, personal, and genuine — like a message from a friend, not a brand announcement. Keep it human and brief. No hard sell. Add 10–15 seasonal and local hashtags.
+
+Write 2 versions: one very short and heartfelt (1–2 sentences) and one slightly longer (3–4 sentences).</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-holiday-2')">📋 Copy Step 2</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════
+     TIPS
+══════════════════════════════════ -->
+<div class="panel" id="panel-tips">
+  <p class="intro">How to get the most out of every session — from setup to final edits.</p>
+
+  <div class="callout" style="border-color:rgba(155,140,110,0.4);">
+    <div class="callout-icon">✨</div>
+    <div><strong>It works.</strong> Uploading a headshot and logo, pasting the setup message, and sending one prompt produced a publish-ready market update graphic — with real stats, real contact info, and the correct logo — on the very first try.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec">Making edits — the inline image editor</div>
+  <div class="setup-card" style="margin-bottom:1.25rem;">
+    <div class="setup-card-header"><span>Use the ChatGPT pencil tool for finishing touches</span></div>
+    <div class="setup-body">
+      <p>When a graphic is close but needs a small fix — wrong handle, logo placement, a stat — don't regenerate the whole thing. Use the <strong>inline image editor</strong> to fix only what needs changing.</p>
+      <ul class="field-list">
+        <li>Hover over the generated image and tap the <strong>pencil icon ✏️</strong></li>
+        <li>In the editor, select the <strong>Select tool</strong> (cursor/lasso icon)</li>
+        <li>Draw a selection around <em>only the area</em> you want to fix</li>
+        <li>Type your instruction — e.g. <em>"Change this to @mylimitlessagent"</em> or <em>"Replace the logo with the Limitless Group logo from my uploaded file"</em></li>
+        <li>ChatGPT edits only the selected area — everything else stays exactly as is</li>
+      </ul>
+      <p style="font-size:11.5px;color:var(--muted);font-style:italic;">💡 This is the recommended workflow for all finishing touches. Faster and more precise than regenerating.</p>
+    </div>
+  </div>
+
+  <div class="sec">Pro tips</div>
+
+  <div class="tip-card"><div class="tip-num">01</div><div><div class="tip-title">One step at a time</div><div class="tip-desc">Each workflow is designed to be sent one step at a time. Always let ChatGPT finish generating before sending the next message — it works sequentially.</div></div></div>
+  <div class="tip-card"><div class="tip-num">02</div><div><div class="tip-title">Let it do the research</div><div class="tip-desc">For neighborhood spotlights, market updates, and educational carousels — trust ChatGPT to research and write the content. That's where it really shines. Always verify stats before posting.</div></div></div>
+  <div class="tip-card"><div class="tip-num">03</div><div><div class="tip-title">Stories are one line away</div><div class="tip-desc">After any feed graphic, say: "Now create the same design at 1080x1920px for Instagram Stories." ChatGPT will recompose it — you don't have to start over.</div></div></div>
+  <div class="tip-card"><div class="tip-num">04</div><div><div class="tip-title">Ask for 2 variations upfront</div><div class="tip-desc">"Show me 2 layout options for this" gives you choices without multiple rounds of revision. Pick whichever is closest, then refine from there.</div></div></div>
+  <div class="tip-card"><div class="tip-num">05</div><div><div class="tip-title">Save your best prompts</div><div class="tip-desc">When a workflow produces a great result, note any tweaks you made. Over time, the team builds a Limitless-specific prompt library that gets better with every use.</div></div></div>
+  <div class="tip-card"><div class="tip-num">06</div><div><div class="tip-title">Logo tip — always use a background</div><div class="tip-desc">Upload the Limitless logo with a white or cream background, not as a transparent PNG. Transparent files cause rendering issues. Screenshot the logo from any Limitless marketing material for the easiest fix.</div></div></div>
+  <div class="tip-card"><div class="tip-num">07</div><div><div class="tip-title">ChatGPT cuts out your headshot automatically</div><div class="tip-desc">For any graphic requiring your cutout — listings, sold, open house, agent intro — just attach your regular headshot with its background. ChatGPT removes it and composites you seamlessly. If an edge looks rough, use the inline pencil editor to select and clean that area.</div></div></div>
+</div>
+
+
+<footer class="site-footer">
+  <p>Limitless Group · Internal Use Only</p>
+  <span class="ig">📸 @mylimitlessagent</span>
+</footer>
+
+<script>
+function showTab(name, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleWf(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+function copyId(btn, id) {
+  const text = document.getElementById(id).innerText;
+  copyText(btn, text);
+}
+
+function copyText(btn, text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => flashCopied(btn));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); flashCopied(btn); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+}
+
+function flashCopied(btn) {
+  const orig = btn.innerHTML;
+  btn.innerHTML = '✓ Copied!';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+}
+</script>
+</body>
+</html>
