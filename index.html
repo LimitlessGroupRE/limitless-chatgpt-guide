@@ -56,9 +56,9 @@ body { font-family: 'Barlow', sans-serif; background: var(--bg); color: var(--ch
 .setup-body p:last-child { margin-bottom: 0; }
 
 /* FIELD LIST */
-.field-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
-.field-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--mid); line-height: 1.5; }
-.field-list li::before { content: ''; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+.field-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.field-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 12.5px; color: var(--mid); line-height: 1.6; min-width: 0; }
+.field-list li::before { content: ''; width: 5px; height: 5px; min-width: 5px; background: var(--gold); border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
 
 /* BLOCK BOX */
 .block-box { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 8px; padding: 14px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14.5px; color: var(--mid); line-height: 1.78; margin-bottom: 10px; -webkit-user-select: all; user-select: all; }
@@ -156,6 +156,7 @@ body { font-family: 'Barlow', sans-serif; background: var(--bg); color: var(--ch
     <button class="tab-btn" onclick="showTab('brand',this)">Brand Rules</button>
     <button class="tab-btn" onclick="showTab('core',this)">Core Posts</button>
     <button class="tab-btn" onclick="showTab('expanded',this)">More Posts</button>
+    <button class="tab-btn" onclick="showTab('sizes',this)">Sizes</button>
     <button class="tab-btn" onclick="showTab('tips',this)">Tips</button>
   </div>
 </header>
@@ -183,7 +184,7 @@ body { font-family: 'Barlow', sans-serif; background: var(--bg); color: var(--ch
     <div class="setup-card-header"><div class="step-pill">Step 2</div><span>Send your intro + brand instructions</span></div>
     <div class="setup-body">
       <p>After uploading, send this message with your real details filled in. This is the foundation ChatGPT uses for the entire session.</p>
-      <div class="block-box" id="setup-block">I'm going to have you create a series of Instagram graphics for me today. Before we start, here's everything you need to know:
+      <div class="block-box" id="setup-block">I'm going to have you create a series of social media graphics for me today. Before we start, here's everything you need to know:
 
 MY INFO:
 Name: [YOUR FULL NAME], REALTOR®
@@ -192,16 +193,25 @@ Email: [YOUR EMAIL ADDRESS]
 Instagram: @mylimitlessagent
 Brokerage: Limitless Group
 
-I've uploaded my headshot and the Limitless Group logo above. Reference them whenever an agent photo or logo is needed — don't generate a fake logo or placeholder.
+I've uploaded my headshot and the Limitless Group logo above. Reference them when relevant — don't generate a fake logo or placeholder.
 
-BRAND STYLE — follow these rules for every single graphic:
-- Always use a real estate photo as the background — an interior or exterior of a home. Never use a plain, solid, or abstract background.
-- If the background photo competes with the text, blur it, fade it with an overlay, or both. The photo should always feel present but never overwhelming.
-- Color palette: warm white (#faf8f5), soft cream (#f3efe9), warm gold (#9b8c6e), and deep charcoal (#1a1a1a) only. No blues, greens, purples, or any other colors.
-- Typography: bold condensed all-caps for headlines, wide letter-spacing for labels and subtext, clean sans-serif for body copy.
-- Tone: boutique luxury real estate — editorial, refined, confident. Think high-end real estate magazine.
-- The Limitless Group logo appears on every graphic. Use the file I uploaded — never generate a version.
-- My contact info appears where it makes sense for the post type. Use only my real details above — never placeholder text.
+BRAND STYLE — follow these rules for every graphic:
+
+Background: graphics should typically use a lifestyle photo as the background — most often a home interior or exterior, but sometimes a local neighborhood, community moment, or event photo. Never use a plain, solid, or abstract background unless the content absolutely demands it.
+
+Text on busy backgrounds: if a background photo competes with the text, use a subtle bottom-up gradient (dark fading upward from the bottom) to create contrast for text visibility. Only use a full overlay or blur if absolutely necessary — the photo should always feel present and intentional. Avoid adding a solid bar or block behind text.
+
+Color palette: warm white (#faf8f5), soft cream (#f3efe9), warm gold (#9b8c6e), and deep charcoal (#1a1a1a) are the brand foundation. Use these as your starting point and primary direction for every graphic. Other colors may appear naturally in photos and that's fine — just don't introduce off-brand colors in type, overlays, or graphic elements.
+
+Typography: bold condensed all-caps for headlines, wide letter-spacing for labels and subtext, clean sans-serif for body copy.
+
+Tone: boutique luxury real estate — editorial, refined, confident. Think high-end real estate magazine.
+
+Logo: the Limitless Group logo should appear on most graphics where it makes sense. Use the file I uploaded — never generate a version.
+
+My photo: include my headshot when it feels natural and adds to the post — not on every graphic. When you do include me, I should appear as a composited cutout, taking up no more than 20% of the total image area. I should feel like a natural part of the scene, not the dominant focus.
+
+Contact info: include my name, phone, and/or Instagram handle where it makes sense for the post type. Use only my real details above — never placeholder text.
 
 Default size is 1080x1080px. I'll share each request one at a time.</div>
       <button class="copy-btn" onclick="copyId(this,'setup-block')">📋 Copy Setup Message</button>
@@ -226,9 +236,9 @@ Default size is 1080x1080px. I'll share each request one at a time.</div>
 
   <div class="sec">Core brand rules</div>
   <div class="pillars">
-    <div class="pillar"><span class="pillar-icon">🏡</span><div class="pillar-t">Always a home</div><div class="pillar-d">Every graphic uses a real estate photo — interior or exterior. Never a plain background.</div></div>
-    <div class="pillar"><span class="pillar-icon">🌫️</span><div class="pillar-t">Blur & fade</div><div class="pillar-d">If the photo competes with text, blur it, apply an overlay, or both. Image stays present, text stays readable.</div></div>
-    <div class="pillar"><span class="pillar-icon">🎨</span><div class="pillar-t">4 colors only</div><div class="pillar-d">Warm white, soft cream, warm gold, deep charcoal. Nothing else — ever.</div></div>
+    <div class="pillar"><span class="pillar-icon">📸</span><div class="pillar-t">Lifestyle background</div><div class="pillar-d">Usually a home interior or exterior — but local scenes, signings, and community moments all work. Never plain or abstract.</div></div>
+    <div class="pillar"><span class="pillar-icon">🌫️</span><div class="pillar-t">Gradient for contrast</div><div class="pillar-d">If text needs help reading over a busy photo, use a subtle bottom-up dark gradient. Avoid full overlays or solid text bars.</div></div>
+    <div class="pillar"><span class="pillar-icon">🎨</span><div class="pillar-t">Color foundation</div><div class="pillar-d">Warm white, cream, warm gold, and charcoal are the jumping-off point. Keep graphic elements on-palette — photos can have natural color.</div></div>
     <div class="pillar"><span class="pillar-icon">✏️</span><div class="pillar-t">Editorial type</div><div class="pillar-d">Bold condensed all-caps headlines. Wide-spaced labels. Clean sans-serif body. Serif accents for quotes.</div></div>
   </div>
 
@@ -244,10 +254,12 @@ Default size is 1080x1080px. I'll share each request one at a time.</div>
 
   <div class="sec">When ChatGPT goes off-brand — what to say</div>
 
-  <div class="rule-card"><div class="rule-icon">🔵</div><div><div class="rule-title">Wrong colors appeared</div><div class="rule-desc">Blue, green, purple, or anything not in the palette.</div><div class="rule-fix">"Please revise — remove all colors except warm white (#faf8f5), warm gold (#9b8c6e), and deep charcoal (#1a1a1a)."</div></div></div>
-  <div class="rule-card"><div class="rule-icon">⬜</div><div><div class="rule-title">Plain or solid background</div><div class="rule-desc">ChatGPT generated a flat color background with no home photo.</div><div class="rule-fix">"Please redo this with a real estate interior or exterior as the background. If it's too busy behind the text, blur it or apply a soft overlay."</div></div></div>
+  <div class="rule-card"><div class="rule-icon">🔵</div><div><div class="rule-title">Off-brand colors in graphic elements</div><div class="rule-desc">Blues, greens, purples, or other colors appearing in text, overlays, or design elements (not the photo itself).</div><div class="rule-fix">"Please revise — keep all graphic elements, text, and overlays within the brand palette: warm white (#faf8f5), warm gold (#9b8c6e), and deep charcoal (#1a1a1a)."</div></div></div>
+  <div class="rule-card"><div class="rule-icon">⬜</div><div><div class="rule-title">Plain or solid background</div><div class="rule-desc">ChatGPT generated a flat color background with no lifestyle photo.</div><div class="rule-fix">"Please redo this with a lifestyle photo as the background — a home interior or exterior, or a relevant local scene. If text needs contrast, use a subtle bottom-up dark gradient rather than a full overlay."</div></div></div>
+  <div class="rule-card"><div class="rule-icon">⬛</div><div><div class="rule-title">Heavy overlay or solid text bar</div><div class="rule-desc">The photo is mostly obscured by a dark overlay, or text sits on a solid color block.</div><div class="rule-fix">"Remove the heavy overlay. If the text needs contrast, replace it with a subtle gradient that fades from dark at the very bottom upward — the photo should remain the visual focus."</div></div></div>
   <div class="rule-card"><div class="rule-icon">🖼️</div><div><div class="rule-title">Logo is missing or rendering oddly</div><div class="rule-desc">Most common cause: uploading the logo as a transparent PNG. Upload a version with a white or cream background instead. To fix mid-session, use the inline pencil editor — select the logo area and say: "Replace this with the Limitless Group logo from my uploaded file."</div><div class="rule-fix">Prevention: screenshot the logo from any Limitless marketing PDF — it will have a background already.</div></div></div>
-  <div class="rule-card"><div class="rule-icon">👤</div><div><div class="rule-title">My info shows as placeholder text</div><div class="rule-desc">Name, phone, or handle appears as "[AGENT NAME]" or similar.</div><div class="rule-fix">"Replace all placeholder text with my real info from our session setup: [your name], [your phone], [your email], @mylimitlessagent."</div></div></div>
+  <div class="rule-card"><div class="rule-icon">👤</div><div><div class="rule-title">Agent photo is too large or on every post</div><div class="rule-desc">The headshot is dominating the composition, or appearing on posts where it doesn't add value.</div><div class="rule-fix">"Please scale my cutout down so I take up no more than 20% of the image area — I should feel like a natural part of the scene, not the main subject." Or: "Remove my photo from this one — it doesn't need an agent cutout."</div></div></div>
+  <div class="rule-card"><div class="rule-icon">📝</div><div><div class="rule-title">My info shows as placeholder text</div><div class="rule-desc">Name, phone, or handle appears as "[AGENT NAME]" or similar.</div><div class="rule-fix">"Replace all placeholder text with my real info from our session setup: [your name], [your phone], [your email], @mylimitlessagent."</div></div></div>
   <div class="rule-card"><div class="rule-icon">📰</div><div><div class="rule-title">Looks too generic or template-y</div><div class="rule-desc">Result looks like a stock social media template, not luxury real estate.</div><div class="rule-fix">"This feels too generic. Make it more editorial — think high-end real estate magazine. Refine the typography, add breathing room, and remove anything decorative that isn't serving the design."</div></div></div>
 </div>
 
@@ -278,20 +290,20 @@ Default size is 1080x1080px. I'll share each request one at a time.</div>
 I'm attaching two files: (1) the listing exterior photo and (2) my headshot.
 
 Layout:
-- The listing photo fills the entire canvas as a full-bleed background. Do not add any overlay, brightness adjustment, gradient, or vignette — preserve the photo exactly as it is, natural colors and all.
-- "FOR SALE" in very large bold serif all-caps in the upper portion of the image. Use ITC Benguiat or the closest available heavy serif with that same distinctive character. Stack the text so it repeats 3 times in a layered ghost effect — fully opaque white on top, then around 40% opacity, then around 15% — creating a typographic depth effect. Frame the text block with a thin white rectangle border, inset slightly from the edges.
-- Remove the background from my headshot and place me as a cutout standing in the lower right foreground, large and natural — like I'm standing in front of the home. I should extend all the way down to the bottom bar with no gap or negative space below me.
-- Address and key highlights (beds/baths) in bold white condensed caps in the lower left, above the bottom bar.
-- Bottom bar across the full width — solid dark charcoal strip. Left side: Limitless Group logo from my uploaded file. Right side: "LISTED BY" in small wide-tracked caps above my full name in large condensed white caps, and my phone number below.
+- The listing photo fills the entire canvas as a full-bleed background. Do not add any overlay, brightness adjustment, or vignette — preserve the photo exactly as it is, natural colors and all.
+- "FOR SALE" in very large bold serif all-caps in the upper portion of the image. Use ITC Benguiat or the closest available heavy serif with that same distinctive character. Stack the text so it repeats 3 times in a layered ghost effect — fully opaque white on top, then around 40% opacity, then around 15% — creating typographic depth. Frame the text block with a thin white rectangle border inset slightly from the edges.
+- Remove the background from my headshot and place me as a composited cutout in the lower right foreground. I should take up no more than 20% of the total image area — present and natural, not dominant.
+- Address and key highlights (beds/baths) in bold white condensed caps in the lower left, sitting above a subtle gradient that fades from dark charcoal at the very bottom edge upward — just enough to make the text readable without obscuring the photo.
+- My name and Instagram handle from our session setup in small wide-tracked caps near the bottom left. Limitless Group logo placed naturally near the bottom.
 
 Listing details:
 Address: [STREET ADDRESS, CITY, STATE ZIP]
 Beds/Baths: [e.g. 4 BED | 2.5 BATH]
-Price: [LIST PRICE — optional, include if you want it shown]
+Price: [LIST PRICE — optional]
 
-Use my real name and phone from our session setup. No placeholder text anywhere.</div>
+No placeholder text. No solid bars or blocks behind text.</div>
         <button class="copy-btn" onclick="copyId(this,'wf-listing-1')">📋 Copy Step 1</button>
-        <div class="wf-tip">If the ghost text effect looks too harsh or the photo feels enhanced/brightened, say: "Keep the photo completely unaltered — remove any brightness, contrast, or color adjustments. The image should look exactly as I uploaded it."</div>
+        <div class="wf-tip">If the photo looks color-enhanced or the gradient feels too heavy, say: "Keep the photo completely unaltered and lighten the gradient significantly — it should be barely noticeable."</div>
       </div>
 
       <div class="wf-step caption">
@@ -326,15 +338,15 @@ Write 2 versions: one short (3–4 sentences) and one longer (6–8 sentences). 
 I'm attaching two files: (1) the property exterior photo and (2) my headshot.
 
 Layout:
-- The property photo fills the entire canvas as a full-bleed background. Do not add any overlay, brightness adjustment, or vignette — keep the photo exactly as it appears, natural tones and all.
-- "JUST SOLD" in very large bold serif all-caps in the upper portion of the image. Use ITC Benguiat or the closest available heavy serif with that same character. Stack the text with a layered ghost effect — fully opaque white on top, then ~40% opacity, then ~15% — with a thin white rectangle border framing the text block.
-- Remove the background from my headshot and place me as a cutout in the lower right foreground, large and natural. I should extend all the way down to the bottom bar with no gap below me.
-- Address in bold white condensed caps in the lower left, above the bottom bar.
-- Bottom bar — solid dark charcoal strip. Left: Limitless Group logo from my uploaded file. Right: "SOLD BY" in small wide-tracked caps, then my full name large, then my phone number below.
+- The property photo fills the entire canvas as a full-bleed background. Do not add any overlay, brightness adjustment, or vignette — preserve the photo exactly as it is.
+- "JUST SOLD" in very large bold serif all-caps in the upper portion. Use ITC Benguiat or the closest heavy serif with that same character. Stack the text with the layered ghost effect — fully opaque white on top, then ~40%, then ~15% opacity — with a thin white rectangle border framing the text block.
+- Remove the background from my headshot and place me as a composited cutout in the lower right foreground, taking up no more than 20% of the total image area — natural and present, not dominant.
+- Address in bold white condensed caps in the lower left, sitting above a subtle bottom-up dark gradient — just enough to create contrast for the text without covering the photo.
+- My name and Instagram handle from our session setup in small wide-tracked caps. Limitless Group logo placed naturally near the bottom.
 
 Address: [STREET ADDRESS, CITY]
 
-Use my real name and phone from our session setup. Celebratory but polished — no confetti, no bright colors.</div>
+Celebratory but polished — no confetti, no bright colors, no solid bars behind text.</div>
         <button class="copy-btn" onclick="copyId(this,'wf-sold-1')">📋 Copy Step 1</button>
       </div>
 
@@ -411,19 +423,19 @@ Write 2 versions: one short (2–3 sentences) and one longer (5–6 sentences).<
         <div class="wf-step-note">Your headshot is already uploaded from setup. Optionally attach an interior photo for the background panel.</div>
         <div class="wf-prompt" id="wf-agent-1">Create an agent introduction Instagram graphic (1080x1350px — portrait format).
 
-I'm attaching my headshot. Use a beautiful real estate interior as the background — either source one or I'll attach one. Keep the photo as a full-bleed background; if the interior is very busy, blur it back softly so it reads as atmosphere rather than detail, but don't kill it with an overlay.
+I'm attaching my headshot. Use a beautiful real estate interior as the background — either source one or I'll attach one. Keep it as a full-bleed background; if the interior is very busy, blur it back softly so it reads as atmosphere rather than detail.
 
-Remove the background from my headshot and place me as a cutout in the lower right foreground — large, confident, extending all the way to the bottom bar with no gap.
+Remove the background from my headshot and place me as a composited cutout in the lower right or center foreground. I should take up no more than 20% of the total image area — confident and visible, not overwhelming.
 
-Upper portion: my name in very large bold serif all-caps — ITC Benguiat or the closest heavy serif with that same character. Use the same layered ghost effect as the listing graphics: fully opaque on top, then ~40% and ~15% opacity repeating below, with a thin white rectangle border framing the name block.
+Upper portion: my name in very large bold serif all-caps — ITC Benguiat or the closest heavy serif. Use the layered ghost effect: fully opaque on top, then ~40% and ~15% opacity below, with a thin white rectangle border framing the text.
 
-Lower left above the bottom bar: "REALTOR® · LIMITLESS GROUP" in small warm gold wide-tracked caps, then my phone and email from our session setup.
+Lower left area: "REALTOR® · LIMITLESS GROUP" in small warm gold wide-tracked caps, then my phone and email from our session setup — all sitting above a subtle bottom-up dark gradient for readability.
 
-Bottom bar — solid dark charcoal strip. Left: Limitless Group logo from my uploaded file. Right: @mylimitlessagent in wide-tracked white caps.
+Limitless Group logo placed naturally near the bottom. My Instagram handle in small wide-tracked caps.
 
-No placeholder text. Editorial and confident — this is a first impression.</div>
+No placeholder text. No solid bars behind text. Editorial and confident.</div>
         <button class="copy-btn" onclick="copyId(this,'wf-agent-1')">📋 Copy Step 1</button>
-        <div class="wf-tip">Attach an interior photo you love for the background — a bright, airy living space works beautifully behind a cutout portrait.</div>
+        <div class="wf-tip">Attach an interior photo you love for the background — a bright airy living space works beautifully with a cutout portrait.</div>
       </div>
 
       <div class="wf-step caption">
@@ -516,7 +528,7 @@ Write 2 versions: one short (3–4 sentences) and one longer (6–8 sentences).<
 
       <div class="wf-step">
         <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Cover graphic with stats</span></div>
-        <div class="wf-step-note">ChatGPT will research and populate the stats. Always verify the numbers against your MLS before posting.</div>
+        <div class="wf-step-note">ChatGPT will research and populate the stats automatically. <strong>Always verify numbers against your MLS before posting</strong> — see the disclaimer below the prompt.</div>
         <div class="wf-prompt" id="wf-market-1">Create a local market update Instagram graphic (1080x1080px).
 
 Market area: [CITY OR NEIGHBORHOOD]
@@ -524,9 +536,9 @@ Time period: [e.g. April 2026]
 
 Before designing, research the most current publicly available real estate market data for this area and time period — pull from sources like Realtor.com, Zillow, Redfin, or local MLS reports. Use real numbers only. Display 3 key stats: homes sold, median sale price, and average days on market. Include year-over-year comparison figures where available. Cite your data source in small fine print on the graphic.
 
-Use a real estate interior or exterior photo as the background — blurred back significantly so the data reads clearly. "[AREA] MARKET UPDATE" as the headline in bold condensed charcoal all-caps. Stats in large warm gold numbers with small charcoal labels and YoY change below each. Thin gold dividers between stats. My name, phone, email, Instagram handle, my headshot, and the Limitless Group logo at the bottom — from our session setup.</div>
+Use a real estate interior or exterior photo as the background — blurred back significantly so the data reads clearly. Do not use a plain background. "[AREA] MARKET UPDATE" as the headline in bold condensed charcoal all-caps. Stats in large warm gold numbers with small charcoal labels and YoY change below each. Thin gold dividers between stats. My name, phone, email, Instagram handle, my headshot (no more than 20% of image area), and the Limitless Group logo — from our session setup. No solid bars behind text.</div>
         <button class="copy-btn" onclick="copyId(this,'wf-market-1')">📋 Copy Step 1</button>
-        <div class="wf-tip">Double-check the stats ChatGPT pulls before posting — public data sources can lag by a few weeks. Your MLS is the most accurate source.</div>
+        <div class="wf-tip">⚠️ <strong>Agent disclaimer:</strong> ChatGPT pulls from publicly available sources that may lag your local MLS by weeks. Before posting, verify the stats in your MLS or with your broker. If the numbers look off, you can tell ChatGPT: "Use these corrected stats instead: [your numbers]" and it will regenerate with the accurate data.</div>
       </div>
 
       <div class="wf-step">
@@ -635,18 +647,18 @@ Write 2 versions: one short (3–4 sentences) and one longer (6–8 sentences).<
 I'm attaching two files: (1) the property exterior photo and (2) my headshot.
 
 Layout:
-- The property photo fills the entire canvas as a full-bleed background. Preserve the photo exactly — no color enhancement, no overlay, no vignette.
-- "OPEN HOUSE" in very large bold serif all-caps in the upper portion. Use ITC Benguiat or the closest heavy serif with that same character. Stack the text with the layered ghost effect — fully opaque white on top, then ~40% and ~15% opacity repeating below, with a thin white rectangle border framing the text block.
-- Remove the background from my headshot and place me as a cutout in the lower right foreground, large and natural, extending down to the bottom bar with no gap.
-- Event details in bold white condensed caps in the lower left above the bottom bar: date, time, and address stacked cleanly.
-- Bottom bar — solid dark charcoal strip. Left: Limitless Group logo from my uploaded file. Right: "HOSTED BY" in small wide-tracked caps, then my full name large, then my phone number.
+- The property photo fills the entire canvas as a full-bleed background. Preserve the photo exactly — no color enhancement, overlay, or vignette.
+- "OPEN HOUSE" in very large bold serif all-caps in the upper portion. Use ITC Benguiat or the closest heavy serif. Stack the text with the layered ghost effect — fully opaque white on top, then ~40% and ~15% opacity below — with a thin white rectangle border framing the text.
+- Remove the background from my headshot and place me as a composited cutout in the lower right foreground, taking up no more than 20% of the total image area — natural and inviting, not dominant.
+- Event details in bold white condensed caps in the lower left — date, time, and address — sitting above a subtle bottom-up dark gradient for text contrast.
+- My name and Instagram handle from our session setup in small wide-tracked caps. Limitless Group logo placed naturally near the bottom.
 
 Event details:
 Address: [STREET ADDRESS]
 Date: [DAY, MONTH DATE]
 Time: [TIME RANGE]
 
-Use my real name and phone from our session setup. Clean, confident, and inviting — no clip art.</div>
+No placeholder text. No solid bars behind text. Clean, confident, and inviting.</div>
         <button class="copy-btn" onclick="copyId(this,'wf-oh-1')">📋 Copy Step 1</button>
         <div class="wf-tip">After the feed post, ask: "Now create the same design at 1080x1920px for Instagram Stories." ChatGPT will recompose it vertically.</div>
       </div>
@@ -676,23 +688,23 @@ Write 2 versions: one short (2–3 sentences) and one with more detail about the
 
       <div class="wf-step">
         <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Teaser graphic</span></div>
-        <div class="wf-step-note">Attach the property photo. The intentional blur/dark overlay is on-brand here — it builds anticipation.</div>
+        <div class="wf-step-note">Attach the property photo. A heavier blur and overlay is intentional here — it builds anticipation.</div>
         <div class="wf-prompt" id="wf-cs-1">Create a coming soon teaser Instagram graphic (1080x1350px — portrait format).
 
 I'm attaching two files: (1) the property exterior photo and (2) my headshot.
 
 Layout:
-- The property photo fills the entire canvas as a full-bleed background. This is the one case where you can blur the photo more heavily and apply a darker overlay — the mystery is intentional. The home should be visible but slightly obscured, building anticipation.
-- "COMING SOON" in very large bold serif all-caps in the upper portion. Use ITC Benguiat or the closest heavy serif with that same character. Stack the text with the layered ghost effect — fully opaque white on top, then ~40% and ~15% opacity below, with a thin white rectangle border framing the text.
-- Remove the background from my headshot and place me as a cutout in the lower right foreground, large and natural, extending down to the bottom bar with no gap.
-- Area or teaser line in warm gold wide-tracked caps in the lower left above the bottom bar.
-- Bottom bar — solid dark charcoal strip. Left: Limitless Group logo from my uploaded file. Right: my full name and phone from our session setup.
+- The property photo fills the entire canvas as a full-bleed background. This is the one exception where a heavier blur and darker overlay is appropriate — the mystery is intentional. The home should feel present but slightly obscured, building anticipation.
+- "COMING SOON" in very large bold serif all-caps in the upper portion. Use ITC Benguiat or the closest heavy serif. Stack the text with the layered ghost effect — fully opaque white on top, then ~40% and ~15% opacity below — with a thin white rectangle border framing the text.
+- Remove the background from my headshot and place me as a composited cutout in the lower right foreground, taking up no more than 20% of the total image area.
+- Area or teaser line in warm gold wide-tracked caps in the lower left, above a subtle gradient for readability.
+- My name, Instagram handle, and Limitless Group logo near the bottom.
 
 Area or neighborhood: [NEIGHBORHOOD OR CITY — no full address yet]
-Teaser line: [optional — e.g. "A rare find in Fort Wayne" — or leave blank and write something compelling]
+Teaser line: [optional — or leave blank and write something compelling]
 Timeframe: [optional — e.g. "Available next week"]
 
-No placeholder text anywhere.</div>
+No placeholder text. No solid bars behind text.</div>
         <button class="copy-btn" onclick="copyId(this,'wf-cs-1')">📋 Copy Step 1</button>
       </div>
 
@@ -727,18 +739,18 @@ Write 2 versions: one short and punchy (2–3 sentences) and one with a bit more
 I'm attaching two files: (1) the listing photo and (2) my headshot.
 
 Layout:
-- The listing photo fills the entire canvas as a full-bleed background. Preserve the photo exactly — no color enhancement, no vignette, no overlay.
-- "PRICE IMPROVEMENT" or "NOW PRICED AT" in very large bold serif all-caps in the upper portion. Use ITC Benguiat or the closest heavy serif with that same character. Stack the text with the layered ghost effect — fully opaque warm gold on top (not white — gold makes this feel like opportunity, not urgency), then ~40% and ~15% opacity below, with a thin gold rectangle border framing the text.
-- Remove the background from my headshot and place me as a cutout in the lower right foreground, large and natural, extending down to the bottom bar with no gap.
-- Address and new price in bold white condensed caps in the lower left above the bottom bar.
-- Bottom bar — solid dark charcoal strip. Left: Limitless Group logo from my uploaded file. Right: my full name and phone from our session setup.
+- The listing photo fills the entire canvas as a full-bleed background. Preserve the photo exactly — no color enhancement, overlay, or vignette.
+- "PRICE IMPROVEMENT" or "NOW PRICED AT" in very large bold serif all-caps in the upper portion. Use ITC Benguiat or the closest heavy serif. Stack the text with the layered ghost effect — fully opaque warm gold on top (gold signals opportunity, not urgency), then ~40% and ~15% opacity below — with a thin gold rectangle border framing the text.
+- Remove the background from my headshot and place me as a composited cutout in the lower right foreground, taking up no more than 20% of the total image area.
+- Address and new price in bold white condensed caps in the lower left, above a subtle bottom-up dark gradient for readability.
+- My name, Instagram handle, and Limitless Group logo near the bottom.
 
 Details:
 Address: [STREET ADDRESS]
 New price: [NEW PRICE]
 Previous price: [PREVIOUS PRICE — delete this line if you don't want to show the comparison]
 
-Tone: confident and opportunity-focused. This is good news for buyers — make it feel that way.</div>
+No solid bars behind text. Tone: confident and opportunity-focused.</div>
         <button class="copy-btn" onclick="copyId(this,'wf-price-1')">📋 Copy Step 1</button>
       </div>
 
@@ -791,12 +803,52 @@ Write 2 versions: one very short and heartfelt (1–2 sentences) and one slightl
     </div>
   </div>
 
+  <!-- ── WILD CARD ── -->
+  <div class="wf-card" id="wf-wildcard">
+    <div class="wf-header" onclick="toggleWf('wf-wildcard')">
+      <span class="wf-icon">🎲</span>
+      <span class="wf-title">Wild Card — Filler Content</span>
+      <span class="wf-chevron">⌄</span>
+    </div>
+    <div class="wf-body">
+
+      <div class="wf-step" style="background:var(--gold-xlt);">
+        <div class="wf-step-label"><span class="wf-step-num" style="background:rgba(155,140,110,0.25);">About this prompt</span><span class="wf-step-title">One prompt, unlimited outcomes</span></div>
+        <div class="wf-step-note">Use this when you want to post something polished and on-brand but don't have a specific listing or event to promote. ChatGPT will research a topic, decide the format, and create something genuinely valuable — no two outputs will be the same. Works especially well for Stories filler and grid consistency.</div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-label"><span class="wf-step-num">Step 1</span><span class="wf-step-title">Generate the graphic</span></div>
+        <div class="wf-step-note">No attachments needed — ChatGPT will choose the topic and source or generate an appropriate lifestyle photo. You can optionally give it a general theme to work within.</div>
+        <div class="wf-prompt" id="wf-wc-1">I need you to generate a social media graphic image that adds genuine value to my audience and looks great on my Instagram grid or in Stories. Research a topic first, then create the image — don't ask me for input, just go.
+
+The only requirements: it fits the Limitless Group brand and is something a Fort Wayne home buyer, seller, or homeowner would actually find interesting or useful right now. Make it specific, timely, or surprising — not generic filler.
+
+Great directions to explore: a local Fort Wayne real estate stat, a little-known homeowner tip, a seasonal home care reminder, a quick market insight, a fun local Fort Wayne fact, a real estate myth vs. reality, or anything else you think would resonate with this audience today.
+
+Generate a lifestyle photo as the background — a home interior, exterior, or relevant local scene that fits the topic. Brand rules apply: warm white, cream, gold, and charcoal palette; editorial typography; subtle gradient for text contrast if needed; Limitless Group logo from my uploaded file placed naturally; my Instagram handle from our session setup; no solid bars or plain backgrounds.
+
+Default size: 1080x1080px — unless a Story format (1080x1920px) makes more sense for the content, in which case use that and tell me why.
+
+Tell me what topic and format you chose, then generate the image.</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-wc-1')">📋 Copy Step 1</button>
+        <div class="wf-tip">Give it a loose theme to steer the direction without locking it in — e.g. "Keep it seasonal" or "Something Fort Wayne specific" or "Focus on buyers right now." The more latitude you give it, the more creative and unexpected the result.</div>
+      </div>
+
+      <div class="wf-step caption">
+        <div class="wf-step-label"><span class="wf-step-num">Step 2</span><span class="wf-step-title">Generate the caption</span></div>
+        <div class="wf-prompt" id="wf-wc-2">Now write an Instagram caption to go with this graphic.
+
+Style: match the tone of the content — educational, warm, surprising, or conversational depending on what was created. The caption should feel like a natural extension of the graphic, not a sales pitch. End with a question or light call to action that invites engagement. Add 12–18 hashtags relevant to the topic, local Fort Wayne tags, and Limitless Group branding.
+
+Write 2 versions: one short (2–3 sentences) and one longer (5–6 sentences).</div>
+        <button class="copy-btn" onclick="copyId(this,'wf-wc-2')">📋 Copy Step 2</button>
+      </div>
+
+    </div>
+  </div>
+
 </div>
-
-
-<!-- ══════════════════════════════════
-     TIPS
-══════════════════════════════════ -->
 <div class="panel" id="panel-tips">
   <p class="intro">How to get the most out of every session — from setup to final edits.</p>
 
@@ -827,6 +879,103 @@ Write 2 versions: one very short and heartfelt (1–2 sentences) and one slightl
 
   <div class="tip-card"><div class="tip-num">01</div><div><div class="tip-title">One step at a time</div><div class="tip-desc">Each workflow is designed to be sent one step at a time. Always let ChatGPT finish generating before sending the next message — it works sequentially.</div></div></div>
   <div class="tip-card"><div class="tip-num">02</div><div><div class="tip-title">Let it do the research</div><div class="tip-desc">For neighborhood spotlights, market updates, and educational carousels — trust ChatGPT to research and write the content. That's where it really shines. Always verify stats before posting.</div></div></div>
+  <div class="tip-card"><div class="tip-num">03</div><div><div class="tip-title">Stories are one line away</div><div class="tip-desc">After any feed graphic, say: "Now create the same design at 1080x1920px for Instagram Stories." ChatGPT will recompose it — you don't have to start over.</div></div></div>
+  <div class="tip-card"><div class="tip-num">04</div><div><div class="tip-title">Ask for 2 variations upfront</div><div class="tip-desc">"Show me 2 layout options for this" gives you choices without multiple rounds of revision. Pick whichever is closest, then refine from there.</div></div></div>
+  <div class="tip-card"><div class="tip-num">05</div><div><div class="tip-title">Save your best prompts</div><div class="tip-desc">When a workflow produces a great result, note any tweaks you made. Over time, the team builds a Limitless-specific prompt library that gets better with every use.</div></div></div>
+  <div class="tip-card"><div class="tip-num">06</div><div><div class="tip-title">Logo tip — always use a background</div><div class="tip-desc">Upload the Limitless logo with a white or cream background, not as a transparent PNG. Transparent files cause rendering issues. Screenshot the logo from any Limitless marketing material for the easiest fix.</div></div></div>
+  <div class="tip-card"><div class="tip-num">07</div><div><div class="tip-title">ChatGPT cuts out your headshot automatically</div><div class="tip-desc">For any graphic requiring your cutout — listings, sold, open house, agent intro — just attach your regular headshot with its background. ChatGPT removes it and composites you seamlessly. If an edge looks rough, use the inline pencil editor to select and clean that area.</div></div></div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     SIZES
+══════════════════════════════════ -->
+<div class="panel" id="panel-sizes">
+  <p class="intro">All prompts default to 1080x1080px square. To change the size, copy the dimension you need and paste it into your prompt — or tell ChatGPT: "Recreate this at [dimension]."</p>
+
+  <div class="sec">Standard formats</div>
+
+  <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:1.5rem;">
+
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+      <div>
+        <div style="font-size:13px; font-weight:600; color:var(--charcoal); margin-bottom:3px;">Square Feed Post</div>
+        <div style="font-size:11.5px; color:var(--muted);">Instagram feed, Facebook post — the default for all prompts</div>
+      </div>
+      <button class="copy-btn" style="flex-shrink:0; margin:0;" onclick="copyText(this,'1080x1080px')">📋 1080x1080px</button>
+    </div>
+
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+      <div>
+        <div style="font-size:13px; font-weight:600; color:var(--charcoal); margin-bottom:3px;">Portrait Feed Post</div>
+        <div style="font-size:11.5px; color:var(--muted);">Takes up more screen real estate in the feed — great for listing graphics and agent intros</div>
+      </div>
+      <button class="copy-btn" style="flex-shrink:0; margin:0;" onclick="copyText(this,'1080x1350px')">📋 1080x1350px</button>
+    </div>
+
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+      <div>
+        <div style="font-size:13px; font-weight:600; color:var(--charcoal); margin-bottom:3px;">Instagram / Facebook Story</div>
+        <div style="font-size:11.5px; color:var(--muted);">Full-screen vertical format for Stories and Reels covers</div>
+      </div>
+      <button class="copy-btn" style="flex-shrink:0; margin:0;" onclick="copyText(this,'1080x1920px')">📋 1080x1920px</button>
+    </div>
+
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+      <div>
+        <div style="font-size:13px; font-weight:600; color:var(--charcoal); margin-bottom:3px;">Facebook Cover Photo</div>
+        <div style="font-size:11.5px; color:var(--muted);">Profile page banner — wide landscape format</div>
+      </div>
+      <button class="copy-btn" style="flex-shrink:0; margin:0;" onclick="copyText(this,'1640x624px')">📋 1640x624px</button>
+    </div>
+
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+      <div>
+        <div style="font-size:13px; font-weight:600; color:var(--charcoal); margin-bottom:3px;">Facebook / Instagram Landscape</div>
+        <div style="font-size:11.5px; color:var(--muted);">Wider feed post — good for property showcases and market data</div>
+      </div>
+      <button class="copy-btn" style="flex-shrink:0; margin:0;" onclick="copyText(this,'1200x628px')">📋 1200x628px</button>
+    </div>
+
+  </div>
+
+  <div class="callout"><div class="callout-icon">💡</div><div>After creating any graphic, ask ChatGPT: <strong>"Now recreate this at [dimension] — recompose the layout to fit the new format."</strong> It will adapt the design without you having to start over.</div></div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     TIPS
+══════════════════════════════════ -->
+<div class="panel" id="panel-tips">
+  <p class="intro">How to get the most out of every session — from setup to final edits.</p>
+
+  <div class="callout" style="border-color:rgba(155,140,110,0.4);">
+    <div class="callout-icon">✨</div>
+    <div><strong>It works.</strong> Uploading a headshot and logo, pasting the setup message, and sending one prompt produced a publish-ready market update graphic — with real stats, real contact info, and the correct logo — on the very first try.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec">Making edits — the inline image editor</div>
+  <div class="setup-card" style="margin-bottom:1.25rem;">
+    <div class="setup-card-header"><span>Use the ChatGPT pencil tool for finishing touches</span></div>
+    <div class="setup-body">
+      <p>When a graphic is close but needs a small fix — wrong handle, logo placement, a stat — don't regenerate the whole thing. Use the <strong>inline image editor</strong> to fix only what needs changing.</p>
+      <ul class="field-list">
+        <li>Hover over the generated image and tap the <strong>pencil icon ✏️</strong></li>
+        <li>In the editor, select the <strong>Select tool</strong> (cursor/lasso icon)</li>
+        <li>Draw a selection around only the area you want to fix</li>
+        <li>Type your instruction — e.g. "Change this to @mylimitlessagent" or "Replace the logo with the Limitless Group logo from my uploaded file"</li>
+        <li>ChatGPT edits only the selected area — everything else stays exactly as is</li>
+      </ul>
+      <p style="font-size:11.5px;color:var(--muted);font-style:italic;">💡 This is the recommended workflow for all finishing touches. Faster and more precise than regenerating.</p>
+    </div>
+  </div>
+
+  <div class="sec">Pro tips</div>
+
+  <div class="tip-card"><div class="tip-num">01</div><div><div class="tip-title">One step at a time</div><div class="tip-desc">Each workflow is designed to be sent one step at a time. Always let ChatGPT finish generating before sending the next message — it works sequentially.</div></div></div>
+  <div class="tip-card"><div class="tip-num">02</div><div><div class="tip-title">Let it do the research</div><div class="tip-desc">For neighborhood spotlights, market updates, and Wild Card posts — trust ChatGPT to research and write the content. That's where it really shines. Always verify stats before posting.</div></div></div>
   <div class="tip-card"><div class="tip-num">03</div><div><div class="tip-title">Stories are one line away</div><div class="tip-desc">After any feed graphic, say: "Now create the same design at 1080x1920px for Instagram Stories." ChatGPT will recompose it — you don't have to start over.</div></div></div>
   <div class="tip-card"><div class="tip-num">04</div><div><div class="tip-title">Ask for 2 variations upfront</div><div class="tip-desc">"Show me 2 layout options for this" gives you choices without multiple rounds of revision. Pick whichever is closest, then refine from there.</div></div></div>
   <div class="tip-card"><div class="tip-num">05</div><div><div class="tip-title">Save your best prompts</div><div class="tip-desc">When a workflow produces a great result, note any tweaks you made. Over time, the team builds a Limitless-specific prompt library that gets better with every use.</div></div></div>
